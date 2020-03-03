@@ -6,7 +6,7 @@
 /*   By: rqouchic <rayane.qouchich@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 16:25:36 by rqouchic          #+#    #+#             */
-/*   Updated: 2020/01/11 20:03:45 by rqouchic         ###   ########.fr       */
+/*   Updated: 2020/02/22 17:19:41 by rqouchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef	struct	s_struct
+typedef	struct		s_struct
 {
-	char		flag;
-	int			width;
-	int			precision;
-	char		type;
-	int			bool;
-	int			prec_s;
-	int			x;
-}				t_struct;
+	char			flag;
+	int				width;
+	int				precision;
+	char			type;
+	int				bool;
+	int				prec_s;
+	int				x;
+}					t_struct;
 
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -89,22 +89,23 @@ char				*ft_itoa_base_add(unsigned long long int n, char *base);
 int					ft_putchar_fd_return(char c, int fd);
 char				*ft_strjoin_f12(char const *s1, char const *s2);
 int					get_next_line(int fd, char **line);
-char			*ft_strjoin_s1(char const *s1, char const *s2);
-char			*ft_strjoin_s2(char const *s1, char const *s2);
+char				*ft_strjoin_s1(char const *s1, char const *s2);
+char				*ft_strjoin_s2(char const *s1, char const *s2);
 
-int			ft_print_x(long long int nb, t_struct *data);
-int			ft_printf(const char *str, ...);
-int			ft_print_u(unsigned int nb, t_struct *data);
-int			ft_print_string(char *str, t_struct *data);
-int			ft_print_nb(int nb, t_struct *data);
-int			ft_print_char(char a, t_struct *data);
-int			ft_print_add(long long int nb, t_struct *data);
-void	ft_verif_type(const char *str, t_struct *data, int **i);
-void	ft_verif_precision(const char *str, t_struct *data, int **i,
+int					ft_print_x(long long int nb, t_struct *data);
+int					ft_printf(const char *str, ...);
+int					ft_print_u(unsigned int nb, t_struct *data);
+int					ft_print_string(char *str, t_struct *data);
+int					ft_print_nb(int nb, t_struct *data);
+int					ft_print_char(char a, t_struct *data);
+int					ft_print_add(long long int nb, t_struct *data);
+void				ft_verif_type(const char *str, t_struct *data, int **i);
+void				ft_verif_precision(const char *str, t_struct *data, int **i,
 va_list arg);
-void	ft_verif_width(const char *str, t_struct *data, int **i, va_list arg);
-void	ft_verif_flags(const char *str, t_struct *data, int **i);
-void	ft_initial_data(t_struct *data);
-void		ft_printbis_x(t_struct *data, unsigned long long int *nb,
+void				ft_verif_width(const char *str, t_struct *data,
+int **i, va_list arg);
+void				ft_verif_flags(const char *str, t_struct *data, int **i);
+void				ft_initial_data(t_struct *data);
+void				ft_printbis_x(t_struct *data, unsigned long long int *nb,
 int *p, int *a);
 #endif

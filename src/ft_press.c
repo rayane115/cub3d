@@ -6,7 +6,7 @@
 /*   By: rqouchic <rayane.qouchich@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:18:15 by rqouchic          #+#    #+#             */
-/*   Updated: 2020/02/09 17:14:21 by rqouchic         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:39:56 by rqouchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ int			ft_push(int key, t_all *data)
 		data->mouv.gauche = 1;
 	if (key == 2)
 		data->mouv.droite = 1;
-	if (key == 14)
-	{
-		data->mouv.tourner = 1;
-		data->mouv.vitrotation = 0.1;
-	}
-	if (key == 12)
+	if (key == 14 || key == 124)
 	{
 		data->mouv.tourner = 1;
 		data->mouv.vitrotation = -0.1;
+	}
+	if (key == 12 || key == 123)
+	{
+		data->mouv.tourner = 1;
+		data->mouv.vitrotation = 0.1;
 	}
 	data->mouv.bool = 1;
 	return (0);
@@ -46,10 +46,15 @@ int			ft_depush(int key, t_all *data)
 		data->mouv.gauche = 0;
 	if (key == 2)
 		data->mouv.droite = 0;
-	if (key == 14)
+	if (key == 14 || key == 124)
 		data->mouv.tourner = 0;
-	if (key == 12)
+	if (key == 12 || key == 123)
 		data->mouv.tourner = 0;
+	if (key == 53)
+	{
+		ft_printf("game over esc\n");
+		exit(0);
+	}
 	return (0);
 }
 

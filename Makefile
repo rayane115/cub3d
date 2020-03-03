@@ -9,6 +9,11 @@ SRCS = 	main.c\
 		src/fill_sprite.c\
 		src/ft_raycasting_utils.c\
 		src/fill_sprite_utils.c\
+		src/error.c\
+		src/error_base.c\
+		src/error_bis.c\
+		src/bmp.c\
+		src/bmp_bis.c\
 
 
 LIBFT = -lmlx -framework OpenGL -framework AppKit\
@@ -18,23 +23,23 @@ HEADER =    ft_cube3d.h
 
 all : $(NAME)
 
-#$(LIBFT) :
-#	@(make -C libft)
+$(LIBFT) :
+	@(make -C libft)
 
 $(NAME) : $(SRCS)
-#	@(make -C libft)
+	@(make -C libft)
 	@(gcc $(CFLAGS) $(SRCS) $(LIBFT) -I $(HEADER) -o $(NAME))
-	@(./$(NAME) map.cub)
 
 clean:
-	@(rm -f $(NAME))
-#	make clean -C libft
+	@echo "Clean"
+	@(make clean -C ./libft/)
 
-lib :
-	@(make re -C libft)
-	@(make clean -C libft)
+fclean:	clean
+	@echo "Fclean"
+	@(make fclean -C ./libft/)
+	@(rm -rf $(NAME))
+	@(rm -rf Cub3D.dSYM)
 
-fclean: clean
-#	make fclean -C libft
+re:	fclean all
 
-re : fclean all
+.PHONY:	all clean fclean re

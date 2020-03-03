@@ -6,7 +6,7 @@
 /*   By: rqouchic <rayane.qouchich@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:14:33 by rqouchic          #+#    #+#             */
-/*   Updated: 2020/02/09 16:37:17 by rqouchic         ###   ########.fr       */
+/*   Updated: 2020/02/26 18:28:18 by rqouchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		ft_sprites(t_all *all)
 void		get_color(t_all *all, int i)
 {
 	if (all->sprites[i].img.get_data[all->spr.texsp.x
-			+ all->spr.texsp.y * all->sprites[i].img.w] != 0x0)
+			+ all->spr.texsp.y * all->sprites[i].img.w] != -16777216)
 	{
 		all->sprites[i].img.color =
 			all->sprites[i].img.get_data[all->spr.texsp.x

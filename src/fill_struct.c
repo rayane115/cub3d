@@ -6,7 +6,7 @@
 /*   By: rqouchic <rayane.qouchich@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 23:14:49 by rqouchic          #+#    #+#             */
-/*   Updated: 2020/02/09 16:44:57 by rqouchic         ###   ########.fr       */
+/*   Updated: 2020/02/26 19:42:14 by rqouchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ char		*del_space_str(char *str)
 	i = -1;
 	j = 0;
 	while (str[++i])
+	{
 		if (str[i] == ' ')
 			j++;
+	}
 	if (!(temp = ft_calloc(sizeof(char), i - j + 1)))
 		exit(0);
 	i = -1;
@@ -91,7 +93,9 @@ void		ft_open(char *av, t_all *data)
 	buff = NULL;
 	(void)data;
 	fd = open(av, O_RDWR);
-	while ((ret = get_next_line(fd, &buff) > 0))
+	if (fd == -1)
+		error_arg();
+	while ((ret = get_next_line(fd, &buff)))
 	{
 		ft_fill_my_struct(buff, data, lst);
 		free(buff);

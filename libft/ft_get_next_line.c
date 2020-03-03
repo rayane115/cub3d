@@ -6,15 +6,15 @@
 /*   By: rqouchic <rayane.qouchich@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:24:24 by rqouchic          #+#    #+#             */
-/*   Updated: 2020/01/11 20:04:42 by rqouchic         ###   ########.fr       */
+/*   Updated: 2020/02/22 17:17:31 by rqouchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-# endif
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 100
+#endif
 
 char	*ft_refresh_stock(char *stock, int i)
 {

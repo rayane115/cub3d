@@ -6,7 +6,7 @@
 /*   By: rqouchic <rayane.qouchich@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 13:55:59 by rqouchic          #+#    #+#             */
-/*   Updated: 2020/02/09 17:13:43 by rqouchic         ###   ########.fr       */
+/*   Updated: 2020/03/01 16:54:39 by rqouchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ void		get_texture_no(t_all *data)
 	if (!(image = mlx_xpm_file_to_image(data->raycast.mlx,
 		data->texture.no, &data->raycast.textw_no, &data->raycast.texth_no)))
 	{
-		ft_printf("Error");
+		ft_printf("Error\ntexture");
+		exit(0);
+	}
+	if (data->raycast.textw_no > 64 || data->raycast.texth_no > 64)
+	{
+		ft_printf("Error\nmettre une image de 64 sur 64");
 		exit(0);
 	}
 	data->raycast.text_no = (int *)mlx_get_data_addr(image,
@@ -39,7 +44,12 @@ void		get_texture_ea(t_all *data)
 	if (!(image = mlx_xpm_file_to_image(data->raycast.mlx,
 		data->texture.ea, &data->raycast.textw_ea, &data->raycast.texth_ea)))
 	{
-		ft_printf("Error");
+		ft_printf("Error\ntexture");
+		exit(0);
+	}
+	if (data->raycast.textw_ea > 64 || data->raycast.texth_ea > 64)
+	{
+		ft_printf("Error\nmettre une image de 64 sur 64");
 		exit(0);
 	}
 	data->raycast.text_ea = (int *)mlx_get_data_addr(image,
@@ -56,7 +66,12 @@ void		get_texture_so(t_all *data)
 	if (!(image = mlx_xpm_file_to_image(data->raycast.mlx,
 		data->texture.so, &data->raycast.textw_so, &data->raycast.texth_so)))
 	{
-		ft_printf("Error");
+		ft_printf("Error\ntexture");
+		exit(0);
+	}
+	if (data->raycast.textw_so > 64 || data->raycast.texth_so > 64)
+	{
+		ft_printf("Error\nmettre une image de 64 sur 64");
 		exit(0);
 	}
 	data->raycast.text_so = (int *)mlx_get_data_addr(image,
@@ -73,7 +88,12 @@ void		get_texture_we(t_all *data)
 	if (!(image = mlx_xpm_file_to_image(data->raycast.mlx,
 		data->texture.we, &data->raycast.textw_we, &data->raycast.texth_we)))
 	{
-		ft_printf("Error");
+		ft_printf("Error\ntexture");
+		exit(0);
+	}
+	if (data->raycast.textw_we > 64 || data->raycast.texth_we > 64)
+	{
+		ft_printf("Error\nmettre une image de 64 sur 64");
 		exit(0);
 	}
 	data->raycast.text_we = (int *)mlx_get_data_addr(image,
@@ -88,7 +108,7 @@ t_mlx		get_texture_sprite(t_all *all)
 	if (!(image = mlx_xpm_file_to_image(all->raycast.mlx,
 		all->texture.sprite, &texture.w, &texture.h)))
 	{
-		ft_printf("Error");
+		ft_printf("Error\ntexture");
 		exit(0);
 	}
 	texture.get_data = (int *)mlx_get_data_addr(image, &texture.bits_per_pixel,

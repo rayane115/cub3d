@@ -6,7 +6,7 @@
 /*   By: rqouchic <rayane.qouchich@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:14:24 by rqouchic          #+#    #+#             */
-/*   Updated: 2020/02/09 18:33:34 by rqouchic         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:40:10 by rqouchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,27 +84,27 @@ void		ft_raycast_two(t_all *data)
 
 void		ft_raycasting(t_all *data)
 {
-	int		(*print_pixel)[data->resolution.x][1];
-
-	data->raycast.x = 0;
-	data->raycast.y = 0;
-	print_pixel = ft_print_image(data);
-	while (data->raycast.x++ <= data->resolution.x)
+	data->raycast.x = -1;
+	data->raycast.y = -1;
+	data->mlx.get_data = ft_print_image(data);
+	while (++data->raycast.x <= data->resolution.x)
 	{
 		ft_raycast_two(data);
 		ft_raycast_four(data);
-		while (data->raycast.y++ < data->raycast.drawend)
+		while (++data->raycast.y < data->raycast.drawend)
 		{
 			ft_raycast_six(data);
-			*print_pixel[data->raycast.drawstart++][data->raycast.x] =
-			data->raycast.color;
+			data->mlx.get_data[data->raycast.x + (int)data->raycast.drawstart++
+			* (data->mlx.size_line / 4)] = data->raycast.color;
 		}
 		while (data->raycast.y < data->resolution.y)
 		{
 			data->raycast.r = data->resolution.y - data->raycast.y - 1;
-			*print_pixel[data->raycast.r][data->raycast.x] = 0x0033FF;
-			*print_pixel[data->raycast.drawstart++]
-			[data->raycast.x] = 0x300FF33;
+			data->mlx.get_data[data->raycast.x + data->raycast.y *
+				(data->mlx.size_line / 4)] = data->color.f;
+			data->mlx.get_data[data->raycast.x + (data->resolution.y -
+			data->raycast.y - 1)
+				* (data->mlx.size_line / 4)] = data->color.c;
 			data->raycast.y++;
 		}
 		data->spr.distwall[data->raycast.x] = data->raycast.perpwalldist;

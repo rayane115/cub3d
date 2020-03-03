@@ -6,39 +6,55 @@
 /*   By: rqouchic <rayane.qouchich@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:20:27 by rqouchic          #+#    #+#             */
-/*   Updated: 2020/02/09 17:12:54 by rqouchic         ###   ########.fr       */
+/*   Updated: 2020/02/24 20:28:30 by rqouchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_cube3d.h"
 
-void	ft_bouge_four(t_all *data)
+int			ft_dontmove(t_all *data)
 {
+	if ((data->texture.map[(int)(data->raycast.posx)][(int)(
+			data->raycast.posy)] == '1') ||
+			(data->texture.map[(int)(data->raycast.posx)][(int)(
+			data->raycast.posy)] == '2'))
+		return (0);
+	if ((data->texture.map[(int)(data->raycast.posx)][(int)(
+			data->raycast.posy)] == '1') ||
+			(data->texture.map[(int)(data->raycast.posx)][(int)(
+			data->raycast.posy)] == '2'))
+		return (0);
+	return (1);
+}
+
+void		ft_bouge_four(t_all *data)
+{
+	double	tmp1;
+	double	tmp2;
+
+	tmp1 = data->raycast.posx;
+	tmp2 = data->raycast.posy;
 	if (data->mouv.droite)
 	{
-		if (data->texture.map[(int)(data->raycast.posx +
-		data->raycast.planex * data->mouv.vitmarche)][(int)(
-			data->raycast.posy)] == '0')
-			data->raycast.posx += data->raycast.planex * data->mouv.vitmarche;
-		if (data->texture.map[(int)(data->raycast.posx)][(int)(
-			data->raycast.posy +
-			data->raycast.planey * data->mouv.vitmarche)] == '0')
-			data->raycast.posy += data->raycast.planey * data->mouv.vitmarche;
+		data->raycast.posx += data->raycast.planex * data->mouv.vitmarche;
+		if (!ft_dontmove(data))
+			data->raycast.posx = tmp1;
+		data->raycast.posy += data->raycast.planey * data->mouv.vitmarche;
+		if (!ft_dontmove(data))
+			data->raycast.posy = tmp2;
 	}
 	if (data->mouv.gauche)
 	{
-		if (data->texture.map[(int)(data->raycast.posx -
-		data->raycast.planex *
-		data->mouv.vitmarche)][(int)(data->raycast.posy)] == '0')
-			data->raycast.posx -= data->raycast.planex * data->mouv.vitmarche;
-		if (data->texture.map[(int)(data->raycast.posx)][(int)(
-			data->raycast.posy -
-			data->raycast.planey * data->mouv.vitmarche)] == '0')
-			data->raycast.posy -= data->raycast.planey * data->mouv.vitmarche;
+		data->raycast.posx -= data->raycast.planex * data->mouv.vitmarche;
+		if (!ft_dontmove(data))
+			data->raycast.posx = tmp1;
+		data->raycast.posy -= data->raycast.planey * data->mouv.vitmarche;
+		if (!ft_dontmove(data))
+			data->raycast.posy = tmp2;
 	}
 }
 
-void	ft_bouge_three(t_all *data)
+void		ft_bouge_three(t_all *data)
 {
 	if (data->mouv.tourner)
 	{
@@ -59,38 +75,41 @@ void	ft_bouge_three(t_all *data)
 	}
 }
 
-void	ft_bouge_two(t_all *data)
+void		ft_bouge_two(t_all *data)
 {
+	double	tmp1;
+	double	tmp2;
+
+	tmp1 = data->raycast.posx;
+	tmp2 = data->raycast.posy;
 	data->mouv.vitmarche = 0.2;
 	if (data->mouv.avancer)
 	{
-		if (data->texture.map[(int)(data->raycast.posx + data->raycast.dirx *
-		data->mouv.vitmarche)][(int)(data->raycast.posy)] == '0')
-			data->raycast.posx += data->raycast.dirx * data->mouv.vitmarche;
-		if (data->texture.map[(int)(data->raycast.posx)][(int)(
-			data->raycast.posy + data->raycast.diry *
-			data->mouv.vitmarche)] == '0')
-			data->raycast.posy += data->raycast.diry * data->mouv.vitmarche;
+		data->raycast.posx += data->raycast.dirx * data->mouv.vitmarche;
+		if (!ft_dontmove(data))
+			data->raycast.posx = tmp1;
+		data->raycast.posy += data->raycast.diry * data->mouv.vitmarche;
+		if (!ft_dontmove(data))
+			data->raycast.posy = tmp2;
 	}
 	if (data->mouv.reculer)
 	{
-		if (data->texture.map[(int)(data->raycast.posx -
-		data->raycast.dirx * data->mouv.vitmarche)][(int)(
-			data->raycast.posy)] == '0')
-			data->raycast.posx -= data->raycast.dirx * data->mouv.vitmarche;
-		if (data->texture.map[(int)(data->raycast.posx)][(int)(
-			data->raycast.posy - data->raycast.diry *
-			data->mouv.vitmarche)] == '0')
-			data->raycast.posy -= data->raycast.diry * data->mouv.vitmarche;
+		data->raycast.posx -= data->raycast.dirx * data->mouv.vitmarche;
+		if (!ft_dontmove(data))
+			data->raycast.posx = tmp1;
+		data->raycast.posy -= data->raycast.diry * data->mouv.vitmarche;
+		if (!ft_dontmove(data))
+			data->raycast.posy = tmp2;
 	}
 }
 
-int		ft_bouge(t_all *data)
+int			ft_bouge(t_all *data)
 {
 	ft_bouge_two(data);
 	ft_bouge_three(data);
 	ft_bouge_four(data);
-	data->spr.distwall = ft_calloc(sizeof(double*), data->resolution.x);
+	if (!(data->spr.distwall = ft_calloc(sizeof(double*), data->resolution.x)))
+		return (-1);
 	ft_raycasting(data);
 	ft_sprites(data);
 	init_sprites(data);
